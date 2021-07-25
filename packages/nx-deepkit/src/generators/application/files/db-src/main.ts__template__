@@ -1,0 +1,25 @@
+import 'reflect-metadata';
+import { cpus } from "os";
+
+import { Application, KernelModule } from '@deepkit/framework';
+import { ExampleCommand } from './app/example.command';
+import { AppController, AppService, AppDb } from './app';
+
+Application.create({
+  controllers: [ExampleCommand, AppController],
+  listeners: [],
+  providers: [AppService],
+  imports: [
+    KernelModule.configure({
+      host: '0.0.0.0',
+      workers: cpus().length,
+      databases: [AppDb],
+
+      // Uncomment to automatically apply schema changes on startup
+      // migrateOnStartup: true,
+
+      // Uncomment to enable the Deepkit debug endpoint
+      // debug: true
+    }),
+  ],
+}).run();

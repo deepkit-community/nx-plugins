@@ -1,0 +1,8 @@
+import { injectable } from '@deepkit/injector';
+
+@injectable()
+export class AppService {
+  getMessage() {
+    return { message: 'Hello, world!' };
+  }
+}

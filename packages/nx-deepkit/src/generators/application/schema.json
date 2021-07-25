@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "id": "Application",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use?"
+    },
+    "db": {
+      "type": "boolean",
+      "description": "Whether or not a docker compose database should be configured",
+      "x-prompt": "Would you like to include a working docker compose and database?",
+      "default": false
+    },
+    "dbConfig": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of database server to create",
+          "enum": ["postgres"]
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the default database to be created in the selected server kind",
+          "default": "database"
+        },
+        "hostPort": {
+          "type": "number",
+          "description": "The port that the database server will be exposed on the hosting machine (for connecting to directly)"
+        }
+      }
+    },
+    "tags": {
+      "type": "string",
+      "description": "Add tags to the project (used for linting)",
+      "alias": "t"
+    },
+    "directory": {
+      "type": "string",
+      "description": "A directory where the project is placed",
+      "alias": "d"
+    }
+  },
+  "required": ["name"]
+}
