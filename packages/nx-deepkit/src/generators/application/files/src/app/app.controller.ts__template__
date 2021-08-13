@@ -9,4 +9,9 @@ export class AppController {
   message() {
     return this.appService.getMessage();
   }
+
+  @http.GET('users')
+  users() {
+    return this.appService.getUsers();
+  }
 }

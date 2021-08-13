@@ -6,10 +6,16 @@ import {
 } from '@nrwl/devkit';
 import {
   ApplicationGeneratorOptions,
+  DbKind,
   NormalizedApplicationGeneratorOptions,
 } from '../schema';
 import { Linter } from '@nrwl/linter';
 import type { Schema as NodeApplicationGeneratorOptions } from '@nrwl/node/src/generators/application/schema';
+
+const dbPorts: Record<DbKind, number> = {
+  postgres: 5432,
+  mysql: 3306,
+};
 
 export const normalizeOptions = (
   tree: Tree,
@@ -24,8 +30,11 @@ export const normalizeOptions = (
     appDirectory
   );
 
+  const { dbHostPort, dbKind } = options;
+
   return {
     ...options,
+    dbHostPort: dbHostPort === -1 ? dbPorts[dbKind] : dbHostPort,
     appProjectRoot,
   };
 };

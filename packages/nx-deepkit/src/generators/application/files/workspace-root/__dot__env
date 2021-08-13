@@ -1,10 +1,14 @@
-DB_NAME=<%= dbConfig.name %>
-DB_HOST_PORT=<%= dbConfig.hostPort %>
+DB_HOST=localhost
+DB_HOST_PORT=<%= config.dbHostPort %>
+DB_NAME=<%= config.dbName %>
+DB_USER=<%= config.dbUser %>
+DB_PASSWORD=<%= config.dbPassword %>
 
-DOCKER_DATABASE_URL="postgresql://postgres:password@postgres:5432/<%= dbConfig.name %>"
+DOCKER_DATABASE_URL=<%= dockerDbUrl %>
 
 # Customize the Deepkit Kernel. These values are optimized for local development
 kernel_host=0.0.0.0
 kernel_port=8080
 kernel_debug=true
 kernel_migrateOnStartup=true
+kernel_workers=1

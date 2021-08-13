@@ -41,23 +41,16 @@ export default async function (
     toNodeApplicationGeneratorOptions(normalizedOptions)
   );
 
+  // remove the environment files that come from the node generator since we'll be using env
+  const environmentDir = joinPathFragments(
+    normalizedOptions.appProjectRoot,
+    'src/environments'
+  );
+  tree.delete(environmentDir);
+
   createFiles(tree, normalizedOptions);
 
-  if (normalizedOptions.db) {
-    const dbOptions = normalizedOptions.dbConfig;
-    if (!dbOptions) {
-      // TODO validate this in a better way
-      throw new Error('Database enabled but missing required configuration');
-    }
-
-    const hostPort =
-      dbOptions.hostPort ?? dbOptions.kind === 'postgres' ? 5432 : 3306;
-
-    addComposeAndDb(tree, normalizedOptions.appProjectRoot, {
-      ...dbOptions,
-      hostPort,
-    });
-  }
+  addComposeAndDb(tree, normalizedOptions);
 
   updateJson(
     tree,
@@ -72,6 +65,13 @@ export default async function (
       return json;
     }
   );
+
+  updateJson(tree, joinPathFragments('.', 'package.json'), (json) => {
+    const commandName = `${normalizedOptions.name}:cli`;
+    const tsNodeCommand = `ts-node -P apps/${normalizedOptions.name}/tsconfig.app.json apps/${normalizedOptions.name}/src/main.ts`;
+    json.scripts = { ...json.scripts, [commandName]: tsNodeCommand };
+    return json;
+  });
 
   // we need to update the workspace.json file to add args to the node serve command
   const projectConfig = readProjectConfiguration(tree, name);

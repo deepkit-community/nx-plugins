@@ -14,30 +14,47 @@
       },
       "x-prompt": "What name would you like to use?"
     },
-    "db": {
-      "type": "boolean",
-      "description": "Whether or not a docker compose database should be configured",
-      "x-prompt": "Would you like to include a working docker compose and database?",
-      "default": false
+    "dbKind": {
+      "type": "string",
+      "description": "The kind of database server to create",
+      "enum": ["postgres", "mysql"],
+      "x-prompt": {
+        "message": "Select your desired database engine",
+        "type": "list",
+        "items": [
+          { "value": "postgres", "label": "postgres" },
+          { "value": "mysql", "label": "mysql" }
+        ]
+      },
+      "default": "postgres"
     },
-    "dbConfig": {
-      "type": "object",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The kind of database server to create",
-          "enum": ["postgres"]
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the default database to be created in the selected server kind",
-          "default": "database"
-        },
-        "hostPort": {
-          "type": "number",
-          "description": "The port that the database server will be exposed on the hosting machine (for connecting to directly)"
-        }
-      }
+    "dbHostPort": {
+      "type": "number",
+      "description": "The port that the database server will be exposed on the hosting machine (for connecting to directly)",
+      "x-prompt": {
+        "message": "Enter the port that the database will be exposed on your host machine.\n\tLeave as -1 for selected DB engine default port",
+        "type": "number",
+        "default": -1
+      },
+      "default": -1
+    },
+    "dbName": {
+      "type": "string",
+      "description": "The name of the default database to be created in the selected server kind",
+      "default": "database",
+      "x-prompt": "Enter the name of the database your application will connect to"
+    },
+    "dbUser": {
+      "type": "string",
+      "description": "The username for your database",
+      "x-prompt": "Enter the username you would like to use when authenticating to the local database",
+      "default": "user"
+    },
+    "dbPassword": {
+      "type": "string",
+      "description": "The password for your database",
+      "x-prompt": "Enter the password you would like to use when authenticating to the local database",
+      "default": "password"
     },
     "tags": {
       "type": "string",

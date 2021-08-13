@@ -1,5 +1,4 @@
-import { Tree } from '@nrwl/devkit';
-import { generateFiles, joinPathFragments } from '@nrwl/devkit';
+import { generateFiles, joinPathFragments, Tree } from '@nrwl/devkit';
 import { NormalizedApplicationGeneratorOptions } from '../schema';
 
 export const createFiles = (

@@ -4,15 +4,18 @@ import { cpus } from "os";
 import { Application, KernelModule } from '@deepkit/framework';
 import { ExampleCommand } from './app/example.command';
 import { AppController, AppService } from './app';
+import { AppDb, DbModule } from './database';
 
 Application.create({
   controllers: [ExampleCommand, AppController],
   listeners: [],
   providers: [AppService],
   imports: [
+    DbModule,
     KernelModule.configure({
       host: '0.0.0.0',
       workers: cpus().length,
+      databases: [AppDb]
     }),
   ],
 })

@@ -1,7 +1,7 @@
 import { Tree, addDependenciesToPackageJson } from '@nrwl/devkit';
 import { generateFiles, joinPathFragments } from '@nrwl/devkit';
-import { NormalizedDbOptions } from '../schema';
 import { dump } from 'js-yaml';
+import { NormalizedApplicationGeneratorOptions } from '../schema';
 import { frameworkVersion } from './constants';
 
 const postgresDeps = {
@@ -9,53 +9,49 @@ const postgresDeps = {
   devDeps: { '@types/pg': '8.x' },
 };
 
-const makePostgresConfig = (options: NormalizedDbOptions) => {
-  const { name, password } = options;
+const mysqlDeps = {
+  deps: { '@deepkit/mysql': frameworkVersion },
+};
+
+const makePostgresConfig = (options: NormalizedApplicationGeneratorOptions) => {
+  const { dbName, dbUser, dbPassword } = options;
   return {
     image: 'postgres:12',
     ports: ['${DB_HOST_PORT}:5432'],
     environment: {
-      POSTGRES_DB: name,
-      POSTGRES_USER: 'postgres',
-      POSTGRES_PASSWORD: password,
+      POSTGRES_DB: dbName,
+      POSTGRES_USER: dbUser,
+      POSTGRES_PASSWORD: dbPassword,
     },
     volumes: ['db_data:/var/lib/postgresql/data'],
   };
 };
 
-const makeDbService = (options: NormalizedDbOptions) => {
-  if (options.kind === 'postgres') {
+const makeDbService = (options: NormalizedApplicationGeneratorOptions) => {
+  if (options.dbKind === 'postgres') {
     return makePostgresConfig(options);
   }
 };
 
 export const addComposeAndDb = (
   tree: Tree,
-  projectPath: string,
-  options: NormalizedDbOptions
+  options: NormalizedApplicationGeneratorOptions
 ) => {
-  const { kind } = options;
+  const { dbKind, dbName, dbHostPort, dbUser, dbPassword } = options;
   const dbService = dump(
-    { [kind]: makeDbService(options) },
+    { [dbKind]: makeDbService(options) },
     {
       indent: 4,
     }
   );
 
-  if (kind === 'postgres') {
+  let dockerDbUrl = '';
+  if (dbKind === 'postgres') {
     addDependenciesToPackageJson(tree, postgresDeps.deps, postgresDeps.devDeps);
+    dockerDbUrl = `postgresql://${dbUser}:${dbPassword}@localhost:${dbHostPort}/${dbName}`;
+  } else if (dbKind === 'mysql') {
+    addDependenciesToPackageJson(tree, mysqlDeps.deps, {});
   }
-
-  generateFiles(
-    tree,
-    joinPathFragments(__dirname, '..', 'files/db-src'),
-    joinPathFragments(projectPath, 'src'),
-    {
-      tmpl: '',
-      template: '',
-      name: options.name,
-    }
-  );
 
   generateFiles(
     tree,
@@ -66,7 +62,26 @@ export const addComposeAndDb = (
       tmpl: '',
       template: '',
       dbService: dbService,
-      dbConfig: options,
+      config: options,
+      dockerDbUrl,
+    }
+  );
+
+  generateFiles(
+    tree,
+    joinPathFragments(__dirname, '..', 'files/database/common'),
+    joinPathFragments(options.appProjectRoot, 'src/database'),
+    {
+      template: '',
+    }
+  );
+
+  generateFiles(
+    tree,
+    joinPathFragments(__dirname, '..', `files/database/impl/${dbKind}`),
+    joinPathFragments(options.appProjectRoot, 'src/database'),
+    {
+      template: '',
     }
   );
 };

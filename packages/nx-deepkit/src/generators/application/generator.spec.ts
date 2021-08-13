@@ -6,7 +6,7 @@ import { ApplicationGeneratorOptions } from './schema';
 
 describe('application generator', () => {
   let tree: Tree;
-  const options: ApplicationGeneratorOptions = { name: 'test', db: false };
+  const options: ApplicationGeneratorOptions = { name: 'test' };
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
@@ -18,37 +18,19 @@ describe('application generator', () => {
     expect(config).toBeDefined();
   });
 
-  it('should not generate a database file if db config is disabled', async () => {
+  it('should remove the auto generated environment files', async () => {
     await generator(tree, options);
-    expect(tree.exists('database.ts')).toBe(false);
+    expect(tree.exists('apps/test/src/environments')).toBe(false);
   });
 
-  it('should generate a database file if db config is enabled', async () => {
-    await generator(tree, {
-      name: 'test',
-      db: true,
-      dbConfig: { name: 'database', kind: 'postgres', password: 'password' },
-    });
-    expect(tree.exists('apps/test/src/app/database.ts')).toBe(true);
-  });
+  it.each([['.env'], ['docker-compose.yml']])(
+    'should generate workspace root %s',
+    async (file) => {
+      await generator(tree, {
+        name: 'test',
+      });
 
-  it('should generate a docker compose if db config is included', async () => {
-    await generator(tree, {
-      name: 'test',
-      db: true,
-      dbConfig: { name: 'database', kind: 'postgres', password: 'password' },
-    });
-
-    expect(tree.exists('docker-compose.yml')).toBe(true);
-  });
-
-  it('shoulds generate a .env file', async () => {
-    await generator(tree, {
-      name: 'test',
-      db: true,
-      dbConfig: { name: 'database', kind: 'postgres', password: 'password' },
-    });
-
-    expect(tree.exists('.env')).toBe(true);
-  });
+      expect(tree.exists(file)).toBe(true);
+    }
+  );
 });

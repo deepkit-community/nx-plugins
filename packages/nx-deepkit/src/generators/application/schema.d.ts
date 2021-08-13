@@ -1,21 +1,18 @@
+// export type DbKind = 'postgres' | 'mysql' | 'sqlite' | 'mongo';
+export type DbKind = 'postgres' | 'mysql';
+
 export interface ApplicationGeneratorOptions {
   name: string;
-  db: boolean;
-  tags?: string;
   directory?: string;
-  dbConfig?: {
-    kind: 'postgres';
-    hostPort?: number;
-    name: string;
-    password: string;
-  };
+  dbKind: DbKind;
+  dbHostPort: number;
+  dbName: string;
+  dbUser: string;
+  dbPassword?: string;
+  tags?: string;
 }
 
 export interface NormalizedApplicationGeneratorOptions
   extends ApplicationGeneratorOptions {
   appProjectRoot: Path;
 }
-
-export type NormalizedDbOptions = Required<
-  NonNullable<ApplicationGeneratorOptions['dbConfig']>
->;

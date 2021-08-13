@@ -5,6 +5,7 @@ import { frameworkVersion } from './constants';
 
 const rxjsVersion = '6.x';
 const reflectMetadataVersion = '0.1.x';
+const tsNodeVersion = '10.x';
 
 const deepkitFrameworkDeps = [
   'framework',
@@ -39,6 +40,8 @@ export function addDependencies(tree: Tree): GeneratorCallback {
       rxjs: rxjsVersion,
       ['reflect-metadata']: reflectMetadataVersion,
     },
-    {}
+    {
+      ['ts-node']: tsNodeVersion,
+    }
   );
 }
