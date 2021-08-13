@@ -9,7 +9,7 @@ You should be able to safely use it to scaffold Deepkit applications but as impr
 
 ## Getting Started
 
-The easiest way to use the generator is to scaffold a new NX monorepo
+The easiest way to use the generator is to scaffold a new NX monorepo. When prompted, select the `empty` option unless you are familiar with NX monorepos and would like to add some additional app scaffolding (eg for a front end application).
 
 ```shell
 npx create-nx-workspace@latest test-deepkit
@@ -24,6 +24,11 @@ yarn add -D @deepkit-community/nx-plugins
 Generate a new Deepkit application by invoking the NX generator:
 ```
 yarn nx generate @deepkit-community/nx-plugins:application --name=my-app
+```
+
+If using NPM make sure you add the additional `--` as arguments are not automatically forwarded to the underlying script as they are with yarn.
+```
+npm run nx generate @deepkit-community/nx-plugins:application -- --name=my-app
 ```
 
 This will walk you through a wizard that will help you configure a working Docker Compose database configuration for your application

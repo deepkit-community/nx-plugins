@@ -11,4 +11,4 @@ kernel_host=0.0.0.0
 kernel_port=8080
 kernel_debug=true
 kernel_migrateOnStartup=true
-kernel_workers=1
+kernel_workers=0
