@@ -17,7 +17,7 @@ const makePostgresConfig = (options: NormalizedApplicationGeneratorOptions) => {
   const { dbName, dbUser, dbPassword } = options;
   return {
     image: 'postgres:12',
-    ports: ['${DB_HOST_PORT}:5432'],
+    ports: ['${APP_DB_HOST_PORT}:5432'],
     environment: {
       POSTGRES_DB: dbName,
       POSTGRES_USER: dbUser,
@@ -69,17 +69,8 @@ export const addComposeAndDb = (
 
   generateFiles(
     tree,
-    joinPathFragments(__dirname, '..', 'files/database/common'),
-    joinPathFragments(options.appProjectRoot, 'src/database'),
-    {
-      template: '',
-    }
-  );
-
-  generateFiles(
-    tree,
     joinPathFragments(__dirname, '..', `files/database/impl/${dbKind}`),
-    joinPathFragments(options.appProjectRoot, 'src/database'),
+    joinPathFragments(options.appProjectRoot, 'src/app'),
     {
       template: '',
     }

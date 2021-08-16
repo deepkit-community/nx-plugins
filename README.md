@@ -31,15 +31,21 @@ If using NPM make sure you add the additional `--` as arguments are not automati
 npm run nx generate @deepkit-community/nx-plugins:application -- --name=my-app
 ```
 
-This will walk you through a wizard that will help you configure a working Docker Compose database configuration for your application
+This will walk you through a wizard that will help you configure a working Docker Compose database configuration for your application.
 
 ### Running the App
+First, to ensure your docker services are running
+```shell
+docker-compose up -d
+```
+
+Then to start the live reload development server
 ```shell
 yarn start
 ```
 
 ### Interacting with the Deepkit CLI
-A package.json script entrypoint will be added for you automatically based on the chosen name of your app. Based on the example above where we created a new application called `my-app` the appropriate command for invoking the CLI would be
+A package.json script entrypoint will be added for you automatically that is derived from the name of your scaffolded application. Based on the example above where we created a new application called `my-app` the appropriate command for invoking the CLI would be
 ```shell
 yarn my-app:cli
 ```

@@ -1,22 +1,19 @@
 import 'reflect-metadata';
 
 import { Application, KernelModule } from '@deepkit/framework';
-import { ExampleCommand } from './app/example.command';
-import { AppController, AppService } from './app';
-import { AppDb, DbModule } from './database';
+import { AppDb, AppController, AppService, ExampleCommand, appConfig } from './app';
 
 Application.create({
-  controllers: [ExampleCommand, AppController],
+  config: appConfig,
+  controllers: [AppController, ExampleCommand],
   listeners: [],
-  providers: [AppService],
+  providers: [AppDb, AppService],
   imports: [
-    DbModule,
     KernelModule.configure({
       host: '0.0.0.0',
-      databases: [AppDb]
     }),
   ],
 })
-.loadConfigFromEnvFile(['.env'])
-.loadConfigFromEnvVariables('')
-.run();
+  .loadConfigFromEnvFile(['.env'], 'upper')
+  .loadConfigFromEnvVariables('APP_', 'upper')
+  .run();

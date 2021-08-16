@@ -1,5 +1,5 @@
 import { injectable } from '@deepkit/injector';
-import { AppDb, User } from '../database';
+import { AppDb, User } from './app.database';
 
 @injectable()
 export class AppService {

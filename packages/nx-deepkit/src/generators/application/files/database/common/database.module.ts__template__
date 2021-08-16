@@ -1,7 +1,0 @@
-import { AppModule } from '@deepkit/app';
-import { databaseConfig } from './database.config';
-
-export const DbModule = new AppModule({
-  config: databaseConfig,
-  providers: []
-}, 'DB');

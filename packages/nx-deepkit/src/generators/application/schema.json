@@ -7,13 +7,13 @@
   "properties": {
     "name": {
       "type": "string",
-      "minLength": 10,
       "description": "",
       "$default": {
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use?"
+      "x-prompt": "What name would you like to use for your application?",
+      "default": "my-app"
     },
     "dbKind": {
       "type": "string",

@@ -1,0 +1,10 @@
+{
+  "version": "0.0.2-alpha",
+  "homepage": "https://github.com/deepkit-community/nx-plugins#readme",
+  "author": "Jesse Carter <jesse.r.carter@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deepkit-community/nx-plugins"
+  }
+}
