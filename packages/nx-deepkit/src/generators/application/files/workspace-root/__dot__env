@@ -1,14 +1,14 @@
-DB_HOST=localhost
-DB_HOST_PORT=<%= config.dbHostPort %>
-DB_NAME=<%= config.dbName %>
-DB_USER=<%= config.dbUser %>
-DB_PASSWORD=<%= config.dbPassword %>
+APP_DB_HOST=localhost
+APP_DB_HOST_PORT=<%= config.dbHostPort %>
+APP_DB_NAME=<%= config.dbName %>
+APP_DB_USER=<%= config.dbUser %>
+APP_DB_PASSWORD=<%= config.dbPassword %>
 
 DOCKER_DATABASE_URL=<%= dockerDbUrl %>
 
 # Customize the Deepkit Kernel. These values are optimized for local development
-kernel_host=0.0.0.0
-kernel_port=8080
-kernel_debug=true
-kernel_migrateOnStartup=true
-kernel_workers=1
+KERNEL_HOST=0.0.0.0
+KERNEL_PORT=8080
+KERNEL_DEBUG=true
+KERNEL_MIGRATE_ON_STARTUP=true
+KERNEL_HTTP_LOG=true

@@ -1,0 +1,33 @@
+import { injectable } from '@deepkit/injector';
+import { Database } from '@deepkit/orm';
+import { PostgresDatabaseAdapter } from '@deepkit/postgres';
+import { entity, t } from '@deepkit/type';
+import { appConfig } from './app.config';
+
+@(entity.name('user').collectionName('users'))
+export class User {
+  @t.primary.autoIncrement public id!: number;
+  @t.index({ unique: true }) email!: string;
+}
+
+
+class DbConfig extends appConfig.slice(['db']) { }
+
+@injectable()
+export class AppDb extends Database {
+  constructor(
+    config: DbConfig
+  ) {
+    const { db: { host, name, hostPort, password, user } } = config;
+    super(
+      new PostgresDatabaseAdapter({
+        host,
+        database: name,
+        port: hostPort,
+        user,
+        password
+      }),
+      [User]
+    );
+  }
+}

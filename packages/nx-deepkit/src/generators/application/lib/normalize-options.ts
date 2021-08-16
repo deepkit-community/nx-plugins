@@ -32,6 +32,10 @@ export const normalizeOptions = (
 
   const { dbHostPort, dbKind } = options;
 
+  if (!options.name) {
+    throw new Error('Application name is required. Provide a non-empty string');
+  }
+
   return {
     ...options,
     dbHostPort: dbHostPort === -1 ? dbPorts[dbKind] : dbHostPort,

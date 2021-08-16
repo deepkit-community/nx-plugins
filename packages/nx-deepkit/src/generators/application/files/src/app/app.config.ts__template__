@@ -1,0 +1,12 @@
+import { AppModuleConfig } from '@deepkit/app';
+import { t } from '@deepkit/type';
+
+export const appConfig = new AppModuleConfig({
+  db: {
+    host: t.string,
+    name: t.string,
+    hostPort: t.number,
+    user: t.string,
+    password: t.string,
+  },
+});
