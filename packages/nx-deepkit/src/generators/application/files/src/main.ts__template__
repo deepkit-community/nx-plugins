@@ -15,7 +15,7 @@ Application.create({
     }),
     ApiConsoleModule
   ],
-})gener
+})
   // By default, config is automatically loaded from .env and environment variables prefixed with APP_
   .loadConfigFromEnv()
   .run();
