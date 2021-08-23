@@ -33,11 +33,11 @@
       "type": "number",
       "description": "The port that the database server will be exposed on the hosting machine (for connecting to directly)",
       "x-prompt": {
-        "message": "Enter the port that the database will be exposed on your host machine.\n\tLeave as -1 for selected DB engine default port",
+        "message": "Enter the port that the database will be exposed on your host machine.\n\tLeave as 1 for selected DB engine default port",
         "type": "number",
-        "default": -1
+        "default": 1
       },
-      "default": -1
+      "default": 1
     },
     "dbName": {
       "type": "string",

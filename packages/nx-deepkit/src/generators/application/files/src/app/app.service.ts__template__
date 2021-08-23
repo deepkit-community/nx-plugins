@@ -1,9 +1,9 @@
 import { injectable } from '@deepkit/injector';
-import { AppDb, User } from './app.database';
+import { AppDatabase, User } from './app.database';
 
 @injectable()
 export class AppService {
-  constructor(private readonly appDb: AppDb) { }
+  constructor(private readonly appDb: AppDatabase) { }
 
   getMessage() {
     return { message: 'Hello, world!' };

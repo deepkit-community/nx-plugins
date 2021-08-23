@@ -22,12 +22,13 @@ const deepkitFrameworkDeps = [
   'rpc',
   'rpc-tcp',
   'sql',
-  'sqlite',
   'stopwatch',
   'template',
   'type',
   'workflow',
   'bson',
+  'api-console-gui',
+  'api-console-module',
 ];
 
 export function addDependencies(tree: Tree): GeneratorCallback {
