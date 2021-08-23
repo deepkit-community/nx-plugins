@@ -1,5 +1,5 @@
 export * from './app.database';
-export * from './app.controller';
 export * from './app.service';
 export * from './app.config';
-export * from './example.command';
+export * from './cli/example.command';
+export * from './controllers/app.controller';

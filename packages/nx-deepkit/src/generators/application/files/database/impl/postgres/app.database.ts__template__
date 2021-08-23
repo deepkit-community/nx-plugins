@@ -14,7 +14,7 @@ export class User {
 class DbConfig extends appConfig.slice(['db']) { }
 
 @injectable()
-export class AppDb extends Database {
+export class AppDatabase extends Database {
   constructor(
     config: DbConfig
   ) {

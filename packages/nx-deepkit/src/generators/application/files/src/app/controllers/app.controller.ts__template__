@@ -1,5 +1,5 @@
 import { http } from '@deepkit/http';
-import { AppService } from './app.service';
+import { AppService } from '../app.service';
 
 @http.controller('app')
 export class AppController {

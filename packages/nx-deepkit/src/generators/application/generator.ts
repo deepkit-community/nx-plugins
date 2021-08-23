@@ -82,6 +82,10 @@ export default async function (
   };
 
   updateProjectConfiguration(tree, name, projectConfig);
+
+  const contents = (tree.read('.gitignore') ?? '')?.toString();
+  tree.write('.gitignore', `${contents}\n/var`);
+
   await formatFiles(tree);
 
   return runTasksInSerial(initTask, nodeAppTask);

@@ -38,7 +38,7 @@ export const normalizeOptions = (
 
   return {
     ...options,
-    dbHostPort: dbHostPort === -1 ? dbPorts[dbKind] : dbHostPort,
+    dbHostPort: dbHostPort === 1 ? dbPorts[dbKind] : dbHostPort,
     appProjectRoot,
   };
 };

@@ -1,19 +1,21 @@
 import 'reflect-metadata';
 
 import { Application, KernelModule } from '@deepkit/framework';
-import { AppDb, AppController, AppService, ExampleCommand, appConfig } from './app';
+import { ApiConsoleModule } from '@deepkit/api-console-module';
+import { AppDatabase, AppController, AppService, ExampleCommand, appConfig } from './app';
 
 Application.create({
   config: appConfig,
   controllers: [AppController, ExampleCommand],
   listeners: [],
-  providers: [AppDb, AppService],
+  providers: [AppDatabase, AppService],
   imports: [
     KernelModule.configure({
       host: '0.0.0.0',
     }),
+    ApiConsoleModule
   ],
-})
-  .loadConfigFromEnvFile(['.env'], 'upper')
-  .loadConfigFromEnvVariables('APP_', 'upper')
+})gener
+  // By default, config is automatically loaded from .env and environment variables prefixed with APP_
+  .loadConfigFromEnv()
   .run();
