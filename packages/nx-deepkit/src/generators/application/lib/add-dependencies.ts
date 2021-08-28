@@ -1,7 +1,7 @@
 import type { GeneratorCallback, Tree } from '@nrwl/devkit';
 import { addDependenciesToPackageJson } from '@nrwl/devkit';
 import { fromPairs } from 'lodash';
-import { frameworkVersion } from './constants';
+import { FRAMEWORK_VERSION } from '../../../common/constants';
 
 const rxjsVersion = '6.x';
 const reflectMetadataVersion = '0.1.x';
@@ -36,7 +36,10 @@ export function addDependencies(tree: Tree): GeneratorCallback {
     tree,
     {
       ...fromPairs(
-        deepkitFrameworkDeps.map((dep) => [`@deepkit/${dep}`, frameworkVersion])
+        deepkitFrameworkDeps.map((dep) => [
+          `@deepkit/${dep}`,
+          FRAMEWORK_VERSION,
+        ])
       ),
       rxjs: rxjsVersion,
       ['reflect-metadata']: reflectMetadataVersion,

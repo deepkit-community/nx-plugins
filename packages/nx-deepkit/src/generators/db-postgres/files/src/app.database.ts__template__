@@ -10,15 +10,14 @@ export class User {
   @t.index({ unique: true }) email!: string;
 }
 
-
-class DbConfig extends appConfig.slice(['db']) { }
+class DbConfig extends appConfig.slice(['<%= dbConfigPrefix %>']) { }
 
 @injectable()
 export class AppDatabase extends Database {
   constructor(
     config: DbConfig
   ) {
-    const { db: { host, name, hostPort, password, user } } = config;
+    const { <%= dbConfigPrefix %>: { host, name, hostPort, password, user } } = config;
     super(
       new PostgresDatabaseAdapter({
         host,

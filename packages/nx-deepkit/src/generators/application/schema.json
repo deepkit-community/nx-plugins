@@ -15,48 +15,6 @@
       "x-prompt": "What name would you like to use for your application?",
       "default": "my-app"
     },
-    "dbKind": {
-      "type": "string",
-      "description": "The kind of database server to create",
-      "enum": ["postgres", "mysql"],
-      "x-prompt": {
-        "message": "Select your desired database engine",
-        "type": "list",
-        "items": [
-          { "value": "postgres", "label": "postgres" },
-          { "value": "mysql", "label": "mysql" }
-        ]
-      },
-      "default": "postgres"
-    },
-    "dbHostPort": {
-      "type": "number",
-      "description": "The port that the database server will be exposed on the hosting machine (for connecting to directly)",
-      "x-prompt": {
-        "message": "Enter the port that the database will be exposed on your host machine.\n\tLeave as 1 for selected DB engine default port",
-        "type": "number",
-        "default": 1
-      },
-      "default": 1
-    },
-    "dbName": {
-      "type": "string",
-      "description": "The name of the default database to be created in the selected server kind",
-      "default": "database",
-      "x-prompt": "Enter the name of the database your application will connect to"
-    },
-    "dbUser": {
-      "type": "string",
-      "description": "The username for your database",
-      "x-prompt": "Enter the username you would like to use when authenticating to the local database",
-      "default": "user"
-    },
-    "dbPassword": {
-      "type": "string",
-      "description": "The password for your database",
-      "x-prompt": "Enter the password you would like to use when authenticating to the local database",
-      "default": "password"
-    },
     "tags": {
       "type": "string",
       "description": "Add tags to the project (used for linting)",

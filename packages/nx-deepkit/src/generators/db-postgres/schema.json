@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "id": "DbPostgres",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "app": {
+      "type": "string",
+      "description": "The name of the deepkit app that the database will be added to.",
+      "$default": {
+        "$source": "projectName"
+      },
+      "x-prompt": "What is the name of the app that the database will be added to?"
+    },
+    "includeDockerCompose": {
+      "type": "boolean",
+      "description": "Whether or not a docker-compose configuration for Postgres DB will be created.",
+      "x-prompt": "Would you like a docker-compose entry to be added for the Postgres DB?",
+      "default": true
+    },
+    "configPrefix": {
+      "type": "string",
+      "description": "The prefix that will be used for passing configuration values",
+      "x-prompt": "What prefix would you like to use for configuration of the database?",
+      "default": "db"
+    },
+    "hostPort": {
+      "type": "number",
+      "description": "The port that the database server will be available on.",
+      "x-prompt": {
+        "message": "Enter the port that the database will be available on",
+        "type": "number",
+        "default": 5432
+      },
+      "default": 5432
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the default database to be created in the selected server kind",
+      "default": "database",
+      "x-prompt": "Enter the name of the database your application will connect to"
+    },
+    "user": {
+      "type": "string",
+      "description": "The username for your database",
+      "x-prompt": "Enter the username you would like to use when authenticating to the local database",
+      "default": "user"
+    },
+    "password": {
+      "type": "string",
+      "description": "The password for your database",
+      "x-prompt": "Enter the password you would like to use when authenticating to the local database",
+      "default": "password"
+    }
+  },
+  "required": ["app"]
+}

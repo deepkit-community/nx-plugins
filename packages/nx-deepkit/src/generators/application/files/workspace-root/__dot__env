@@ -3,13 +3,3 @@ APP_KERNEL_PORT=8080
 APP_KERNEL_DEBUG=true
 APP_KERNEL_MIGRATE_ON_STARTUP=true
 APP_KERNEL_HTTP_LOG=true
-
-# Database configuration
-APP_DB_HOST=localhost
-APP_DB_HOST_PORT=<%= config.dbHostPort %>
-APP_DB_NAME=<%= config.dbName %>
-APP_DB_USER=<%= config.dbUser %>
-APP_DB_PASSWORD=<%= config.dbPassword %>
-
-
-DOCKER_DATABASE_URL=<%= dockerDbUrl %>

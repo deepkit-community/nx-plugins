@@ -8,10 +8,6 @@ describe('application generator', () => {
   let tree: Tree;
   const options: ApplicationGeneratorOptions = {
     name: 'test',
-    dbHostPort: 1,
-    dbKind: 'postgres',
-    dbName: 'database',
-    dbUser: 'user',
   };
 
   beforeEach(() => {
@@ -29,14 +25,11 @@ describe('application generator', () => {
     expect(tree.exists('apps/test/src/environments')).toBe(false);
   });
 
-  it.each([['.env'], ['docker-compose.yml']])(
-    'should generate workspace root %s',
-    async (file) => {
-      await generator(tree, options);
+  it.each([['.env']])('should generate workspace root %s', async (file) => {
+    await generator(tree, options);
 
-      expect(tree.exists(file)).toBe(true);
-    }
-  );
+    expect(tree.exists(file)).toBe(true);
+  });
 
   it('should add the var directory to gitignore', async () => {
     await generator(tree, options);

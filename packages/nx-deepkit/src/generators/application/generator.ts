@@ -5,6 +5,7 @@ import {
   updateJson,
   readProjectConfiguration,
   updateProjectConfiguration,
+  generateFiles,
 } from '@nrwl/devkit';
 import { ApplicationGeneratorOptions } from './schema';
 import {
@@ -18,7 +19,6 @@ import {
   toNodeApplicationGeneratorOptions,
 } from './lib';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
-import { addComposeAndDb } from './lib/add-compose-and-db';
 
 const initGenerator = async (tree: Tree) => {
   const nodeInitTask = await nodeInitGenerator(tree, {});
@@ -50,7 +50,17 @@ export default async function (
 
   createFiles(tree, normalizedOptions);
 
-  addComposeAndDb(tree, normalizedOptions);
+  // add dotenv configuration
+  generateFiles(
+    tree,
+    joinPathFragments(__dirname, '.', 'files/workspace-root'),
+    '.',
+    {
+      dot: '.',
+      tmpl: '',
+      template: '',
+    }
+  );
 
   updateJson(
     tree,

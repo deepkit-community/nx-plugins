@@ -6,7 +6,12 @@
     "application": {
       "factory": "./src/generators/application/generator",
       "schema": "./src/generators/application/schema.json",
-      "description": "application generator"
+      "description": "Deepkit Application Generator"
+    },
+    "db-postgres": {
+      "factory": "./src/generators/db-postgres/generator",
+      "schema": "./src/generators/db-postgres/schema.json",
+      "description": "Deepkit Postgres DB Generator"
     }
   }
 }
