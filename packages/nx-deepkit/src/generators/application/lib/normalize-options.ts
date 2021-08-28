@@ -12,11 +12,6 @@ import {
 import { Linter } from '@nrwl/linter';
 import type { Schema as NodeApplicationGeneratorOptions } from '@nrwl/node/src/generators/application/schema';
 
-const dbPorts: Record<DbKind, number> = {
-  postgres: 5432,
-  mysql: 3306,
-};
-
 export const normalizeOptions = (
   tree: Tree,
   options: ApplicationGeneratorOptions
@@ -30,15 +25,12 @@ export const normalizeOptions = (
     appDirectory
   );
 
-  const { dbHostPort, dbKind } = options;
-
   if (!options.name) {
     throw new Error('Application name is required. Provide a non-empty string');
   }
 
   return {
     ...options,
-    dbHostPort: dbHostPort === 1 ? dbPorts[dbKind] : dbHostPort,
     appProjectRoot,
   };
 };

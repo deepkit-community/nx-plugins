@@ -2,13 +2,13 @@ import 'reflect-metadata';
 
 import { Application, KernelModule } from '@deepkit/framework';
 import { ApiConsoleModule } from '@deepkit/api-console-module';
-import { AppDatabase, AppController, AppService, ExampleCommand, appConfig } from './app';
+import { AppController, AppService, ExampleCommand, appConfig } from './app';
 
 Application.create({
   config: appConfig,
   controllers: [AppController, ExampleCommand],
   listeners: [],
-  providers: [AppDatabase, AppService],
+  providers: [AppService],
   imports: [
     KernelModule.configure({
       host: '0.0.0.0',

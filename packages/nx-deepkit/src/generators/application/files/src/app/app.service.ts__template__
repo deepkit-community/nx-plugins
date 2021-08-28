@@ -1,15 +1,9 @@
 import { injectable } from '@deepkit/injector';
-import { AppDatabase, User } from './app.database';
 
 @injectable()
 export class AppService {
-  constructor(private readonly appDb: AppDatabase) { }
 
   getMessage() {
     return { message: 'Hello, world!' };
-  }
-
-  getUsers() {
-    return this.appDb.query(User).find();
   }
 }

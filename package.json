@@ -28,10 +28,13 @@
   },
   "private": true,
   "dependencies": {
+    "@nrwl/node": "^12.6.2",
+    "@phenomnomnominal/tsquery": "^4.1.1",
+    "envfile": "^6.17.0",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
-    "tslib": "^2.0.0",
-    "@nrwl/node": "^12.6.2"
+    "ts-morph": "^12.0.0",
+    "tslib": "^2.0.0"
   },
   "devDependencies": {
     "@nrwl/cli": "12.6.2",
