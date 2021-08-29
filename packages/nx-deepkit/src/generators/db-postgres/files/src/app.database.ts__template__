@@ -10,9 +10,9 @@ export class User {
   @t.index({ unique: true }) email!: string;
 }
 
-class DbConfig extends appConfig.slice(['<%= dbConfigPrefix %>']) { }
+class DbConfig extends appConfig.slice('<%= dbConfigPrefix %>') { }
 
-@injectable()
+@injectable
 export class AppDatabase extends Database {
   constructor(
     config: DbConfig

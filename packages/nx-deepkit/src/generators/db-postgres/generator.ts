@@ -14,7 +14,7 @@ import {
   DOCKER_COMPOSE_PATH,
   ENV_FILE_PATH,
   YAML_NULL_PLACEHOLDER,
-  FRAMEWORK_VERSION,
+  PINNED_FRAMEWORK_VERSION,
   APP_INDEX_PATH,
   DB_EXPORT,
 } from '../../common/constants';
@@ -34,7 +34,7 @@ const defaultSchema: Required<Omit<DbPostgresGeneratorSchema, 'app'>> = {
 };
 
 const postgresDeps = {
-  deps: { pg: '8.x', '@deepkit/postgres': FRAMEWORK_VERSION },
+  deps: { pg: '8.x', '@deepkit/postgres': PINNED_FRAMEWORK_VERSION },
   devDeps: { '@types/pg': '8.x' },
 };
 

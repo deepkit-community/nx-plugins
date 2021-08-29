@@ -1,6 +1,6 @@
 import { injectable } from '@deepkit/injector';
 
-@injectable()
+@injectable
 export class AppService {
 
   getMessage() {
